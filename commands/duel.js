@@ -83,7 +83,7 @@ module.exports.run = async (bot, message, args) => {
         let wins = bot.levelD[i].wins;
         let losses = bot.levelD[i].losses;
     };
-    if (!bot.levelD[toDuel.id]){
+    if (bot.levelD[toDuel.id] == undefined){
         bot.levelD[toDuel.id] = {
             guild: message.guild.id,
             exp: 0,
@@ -92,7 +92,7 @@ module.exports.run = async (bot, message, args) => {
             losses: 0
         }
     }
-    if(!bot.levelD[duelEE.id]){
+    if(bot.levelD[duelEE.id] == undefined){
         bot.levelD[duelEE.id] = {
             guild: message.guild.id,
             exp: 0,
