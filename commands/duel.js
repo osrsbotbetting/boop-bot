@@ -91,7 +91,8 @@ module.exports.run = async (bot, message, args) => {
             wins: 0,
             losses: 0
         }
-    }else if(!bot.levelD[duelEE.id]){
+    }
+    if(!bot.levelD[duelEE.id]){
         bot.levelD[duelEE.id] = {
             guild: message.guild.id,
             exp: 0,
