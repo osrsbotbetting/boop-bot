@@ -28,10 +28,10 @@ module.exports.run = async (bot, message, args) => {
         "monitor", "spanish dildo", "volleyball", "KNOWLEDGE", "Coke", "Pepsi", "basketball",
         "pencil", "pen", "staple", "ceramic pot", "paperclip", "iPhone 4S", "shuriken"];
 
-    var specificActions = [`${toDuel1}(${defenderHP}hp) took ${duelEE1}(${attackerHP}hp) to McDonalds`,
-        `${toDuel1}(${defenderHP}hp) installed Vosteran on ${duelEE1}(${attackerHP}hp)'s computer`,
-        `${toDuel1}(${defenderHP}hp) downvoted ${duelEE1}(${attackerHP}hp)'s Reddit post`,
-        `${toDuel1}(${defenderHP}hp) convinced ${duelEE1}(${attackerHP}hp) to not commit suicide`];
+    var specificActions = [`${toDuel}(${defenderHP}hp) took ${duelEE}(${attackerHP}hp) to McDonalds`,
+        `${toDuel}(${defenderHP}hp) installed Vosteran on ${duelEE}(${attackerHP}hp)'s computer`,
+        `${toDuel}(${defenderHP}hp) downvoted ${duelEE}(${attackerHP}hp)'s Reddit post`,
+        `${toDuel}(${defenderHP}hp) convinced ${duelEE}(${attackerHP}hp) to not commit suicide`];
 
     var duelEE = message.author;
     var toDuel = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
