@@ -155,10 +155,16 @@ module.exports.run = async (bot, message, args) => {
     }
     async function play(toDuel1, duelEE1, attackerHP, defenderHP, color){
             wait(1500);
-            const specificActions = [`<${toDuel1} (${defenderHP}hp)> took <${duelEE1} (${attackerHP}hp)> to McDonalds`,
-            `<${toDuel1} (${defenderHP}hp)> installed Vosteran on <${duelEE1} (${attackerHP}hp)>'s computer`,
-            `<${toDuel1} (${defenderHP}hp)> downvoted <${duelEE1} (${attackerHP}hp)>'s Reddit post`,
-            `<${toDuel1} (${defenderHP}hp)> convinced <${duelEE1} (${attackerHP}hp)> to not commit suicide`];
+            //for html codeblock
+            // const specificActions = [`<${toDuel1} (${defenderHP}hp)> took <${duelEE1} (${attackerHP}hp)> to McDonalds`,
+            // `<${toDuel1} (${defenderHP}hp)> installed Vosteran on <${duelEE1} (${attackerHP}hp)>'s computer`,
+            // `<${toDuel1} (${defenderHP}hp)> downvoted <${duelEE1} (${attackerHP}hp)>'s Reddit post`,
+            // `<${toDuel1} (${defenderHP}hp)> convinced <${duelEE1} (${attackerHP}hp)> to not commit suicide`];
+            //for RichEmbed
+            const specificActions = [`${toDuel1} (${defenderHP}hp) took ${duelEE1} (${attackerHP}hp) to McDonalds`,
+            `${toDuel1} (${defenderHP}hp) installed Vosteran on ${duelEE1} (${attackerHP}hp)'s computer`,
+            `${toDuel1} (${defenderHP}hp) downvoted ${duelEE1} (${attackerHP}hp)'s Reddit post`,
+            `${toDuel1} (${defenderHP}hp) convinced ${duelEE1} (${attackerHP}hp) to not commit suicide`];
             let scenario = await randomInt(0,3);
             console.log(scenario);
             if(scenario == 0){
@@ -175,7 +181,7 @@ module.exports.run = async (bot, message, args) => {
                 }
                 await console.log(damage, attackerHP, defenderHP)
                 var embed = await new Discord.RichEmbed()
-                    .setTitle(`${toDuel1}(${defenderHP}hp)`)
+                    .setTitle(`${toDuel1} (${defenderHP}hp)`)
                     .setDescription(`${toDuel1} ${withActions[withActionSlot]} ${duelEE1}(${attackerHP}hp) with a ${items[itemUsed]} dealing ${damage} damage.`)
                     .setColor(color)
                 await message.channel.send({embed: embed});
@@ -212,7 +218,7 @@ module.exports.run = async (bot, message, args) => {
                 }
                 await console.log(damage, attackerHP, defenderHP)
                 var embed = await new Discord.RichEmbed()
-                    .setTitle(`${toDuel1}(${defenderHP}hp)`)
+                    .setTitle(`${toDuel1} (${defenderHP}hp)`)
                     .setDescription(`${toDuel1} ${projectileActions[projectileActionSlot]} ${item} aimed at ${duelEE1}(${attackerHP}hp)'s ${bodyParts[bodyHit]}, ${damageStatement}`)
                     .setColor(color)
                 await message.channel.send({embed: embed});
@@ -230,7 +236,7 @@ module.exports.run = async (bot, message, args) => {
                 damage = randomInt(4,5);
                 await console.log(damage, attackerHP, defenderHP)
                 var embed = await new Discord.RichEmbed()
-                    .setTitle(`${toDuel1}(${defenderHP}hp)`)
+                    .setTitle(`${toDuel1} (${defenderHP}hp)`)
                     .setDescription(`${toDuel1} ${bodyActions[bodyActionSlot]} ${duelEE1}(${attackerHP}hp)'s ${bodyParts[bodyHit]} dealing ${damage}`)
                     .setColor(color)
                 await message.channel.send({embed: embed});
@@ -247,7 +253,7 @@ module.exports.run = async (bot, message, args) => {
                 specificActionsSlot = randomInt(0,specificActions.length-1);
                 await console.log(damage, attackerHP, defenderHP)
                 var embed = await new Discord.RichEmbed()
-                    .setTitle(`${toDuel1}(${defenderHP}hp)`)
+                    .setTitle(`${toDuel1} (${defenderHP}hp)`)
                     .setDescription(`${specificActions[specificActionsSlot]}, dealing ${damage}`)
                     .setColor(color)
                 await message.channel.send({embed: embed});
