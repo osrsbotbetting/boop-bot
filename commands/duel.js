@@ -17,17 +17,21 @@ decline = "❎";
 module.exports.run = async (bot, message, args) => {
     healthZero = 20;
     healthOne = 20;
-    var bodyActions = ["licks", "shat on", "kisses", "rubs", "sucks on", "wetts"];
-    var bodyParts = ["foot", "head", "elbow", "thigh", "toes", "thumb", "fingers", "finger", "palm", "palms",
-        "nose", "knee", "ankle", "shoulder", "face", "hand"];
+    var bodyActions = ["licks", "farted on", "puked on", "pissed on", "shat on", "kisses", "rubs", "sucks on", "wetts"];
+    var bodyParts = ["foot", "head", "elbow", "thigh", "toes", "thumb", "fingers", "finger", "palm",
+        "ear", "nose", "knee", "ankle", "shoulder", "face", "hand", "butt", "belly button"];
 
     var withActions = ["stabs", "slaps", "pokes", "rubs"];
     var projectileActions = ["throws a", "drop kicks a", "catapults a", "fires a"];
-    var projectileLaunchers = ["rifle", "pistol", "crossbow", "cannon", "mortar", "BB gun", "slingshot", "long bow"];
+    var firesALaunchers = ["rifle", "pistol", "crossbow", "cannon", "mortar", "BB gun", "slingshot", "long bow"];
     var items = ["rock","spear", "baseball", "hay bale", "book", "wooden crate", "metal box", "pot", "stick", "keyboard",
-        "monitor", "spanish dildo", "volleyball", "basketball",
+        "monitor", "spanish dildo", "volleyball", "KNOWLEDGE", "Coke", "Pepsi", "basketball",
         "pencil", "pen", "staple", "ceramic pot", "paperclip", "iPhone 4S", "shuriken"];
 
+    var specificActions = [`${toDuel1}(${defenderHP}hp) took ${duelEE1}(${attackerHP}hp) to McDonalds`,
+        `${toDuel1}(${defenderHP}hp) installed Vosteran on ${duelEE1}(${attackerHP}hp)'s computer`,
+        `${toDuel1}(${defenderHP}hp) downvoted ${duelEE1}(${attackerHP}hp)'s Reddit post`,
+        `${toDuel1}(${defenderHP}hp) convinced ${duelEE1}(${attackerHP}hp) to not commit suicide`];
 
     var duelEE = message.author;
     var toDuel = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
@@ -83,7 +87,7 @@ module.exports.run = async (bot, message, args) => {
         let wins = bot.levelD[i].wins;
         let losses = bot.levelD[i].losses;
     };
-    if (bot.levelD[toDuel.id] == undefined){
+    if (!bot.levelD[toDuel.id]){
         bot.levelD[toDuel.id] = {
             guild: message.guild.id,
             exp: 0,
@@ -92,7 +96,7 @@ module.exports.run = async (bot, message, args) => {
             losses: 0
         }
     }
-    if(bot.levelD[duelEE.id] == undefined){
+    if(!bot.levelD[duelEE.id]){
         bot.levelD[duelEE.id] = {
             guild: message.guild.id,
             exp: 0,
@@ -143,19 +147,19 @@ module.exports.run = async (bot, message, args) => {
         }
     }
     function play(toDuel1, duelEE1, attackerHP, defenderHP, color){
-            let scenario = randomInt(0,2);
+            let scenario = randomInt(0,3);
             console.log(scenario);
             if(scenario == 0){
-                withActionSlot = randomInt(0,withActions.length -1);
+                withActionSlot = randomInt(0, withActions.length -1);
                 itemUsed = randomInt(0, items.length -1);
                 if (withActionSlot == 0){
                     damage = randomInt(4,5);
                 }
                 else if (withActionSlot == 1){
-                    damage = randomInt(3,4);
+                    damage = randomInt(3,5);
                 }
                 else{
-                    damage = randomInt(1,3);
+                    damage = randomInt(3,4);
                 }
                 console.log(damage, attackerHP, defenderHP)
                 var embed = new Discord.RichEmbed()
@@ -170,19 +174,19 @@ module.exports.run = async (bot, message, args) => {
                 itemUsed = randomInt(0, items.length -1);
                 bodyHit = randomInt(0,bodyParts.length -1);
                 projectileActionSlot = randomInt(0,projectileActions.length -1);
-                projectile = randomInt(0, projectileLaunchers.length-1);
+                projectile = randomInt(0, firesALaunchers.length-1);
 
                 if(projectileActions[projectileActionSlot] == "fires a"){
-                    item = projectileLaunchers[projectile];
+                    item = firesALaunchers[projectile];
                 }
                 else{ item = items[itemUsed]}
 
                 if(bodyParts[bodyHit] == "head" || bodyParts[bodyHit] == "crotch"){
                     damage = 5
                 }
-                else {damage = randomInt(0,4);}
+                else {damage = randomInt(0,5);}
 
-                if(damage <= 1){
+                if(damage <= 3){
                     damage = 0;
                     damageStatement = `missing`;
                 }
@@ -201,7 +205,7 @@ module.exports.run = async (bot, message, args) => {
             else if(scenario == 2){
                 bodyActionSlot = randomInt(0,bodyActions.length -1);
                 bodyHit = randomInt(0,bodyParts.length -1);
-                damage = randomInt(1,4);
+                damage = randomInt(3,4);
                 console.log(damage, attackerHP, defenderHP)
                 var embed = new Discord.RichEmbed()
                     .setTitle(`${toDuel1}(${defenderHP}hp)`)
@@ -210,7 +214,18 @@ module.exports.run = async (bot, message, args) => {
                 message.channel.send({embed: embed});
                 return attackerHP -= damage;
                 
-            }        
+            }
+            else if(scenario == 3){
+                damage = randomInt(3,4);
+                specificActionsSlot = randomInt(0,specificActions.length-1);
+                console.log(damage, attackerHP, defenderHP)
+                var embed = new Discord.RichEmbed()
+                    .setTitle(`${toDuel1}(${defenderHP}hp)`)
+                    .setDescription(`${specificActions[specificActionsSlot]}, dealing ${damage}`)
+                    .setColor(color)
+                message.channel.send({embed: embed});
+                return attackerHP -= damage;
+            } 
     }
     //sending and accepting/declining duel
     let msg = await message.channel.send(`The user ${toDuel} has been challenged to a duel by ${message.author.tag}. React with :white_check_mark: or :negative_squared_cross_mark: within 10 seconds.`);
