@@ -142,10 +142,10 @@ module.exports.run = async (bot, message, args) => {
         }
     }
     function play(toDuel1, duelEE1, attackerHP, defenderHP, color){
-            var specificActions = [`${toDuel1}(${defenderHP}hp) took ${duelEE1}(${attackerHP}hp) to McDonalds`,
-            `${toDuel1}(${defenderHP}hp) installed Vosteran on ${duelEE1}(${attackerHP}hp)'s computer`,
-            `${toDuel1}(${defenderHP}hp) downvoted ${duelEE1}(${attackerHP}hp)'s Reddit post`,
-            `${toDuel1}(${defenderHP}hp) convinced ${duelEE1}(${attackerHP}hp) to not commit suicide`];
+            var specificActions = [`${toDuel1}(${defenderHP}hp) took <${duelEE1} (${attackerHP}hp)> to McDonalds`,
+            `<${toDuel1} (${defenderHP}hp)> installed Vosteran on <${duelEE1} (${attackerHP}hp)>'s computer`,
+            `<${toDuel1} (${defenderHP}hp)> downvoted <${duelEE1} (${attackerHP}hp)>'s Reddit post`,
+            `<${toDuel1} (${defenderHP}hp)> convinced <${duelEE1} (${attackerHP}hp)> to not commit suicide`];
             let scenario = randomInt(0,3);
             console.log(scenario);
             if(scenario == 0){
@@ -161,11 +161,16 @@ module.exports.run = async (bot, message, args) => {
                     damage = randomInt(3,4);
                 }
                 console.log(damage, attackerHP, defenderHP)
-                var embed = new Discord.RichEmbed()
-                    .setTitle(`${toDuel1}(${defenderHP}hp)`)
-                    .setDescription(`${toDuel1} ${withActions[withActionSlot]} ${duelEE1}(${attackerHP}hp) with a ${items[itemUsed]} dealing ${damage} damage.`)
-                    .setColor(color)
-                message.channel.send({embed: embed});
+                // var embed = new Discord.RichEmbed()
+                //     .setTitle(`${toDuel1}(${defenderHP}hp)`)
+                //     .setDescription(`${toDuel1} ${withActions[withActionSlot]} ${duelEE1}(${attackerHP}hp) with a ${items[itemUsed]} dealing ${damage} damage.`)
+                //     .setColor(color)
+                // message.channel.send({embed: embed});
+                message.channel.send(
+                    "```html\n" + `<${toDuel1} (${defenderHP}hp)>\n`+ 
+                    `<${toDuel1} (${defenderHP})> ${withActions[withActionSlot]} <${duelEE1} (${attackerHP}hp)> with a ${items[itemUsed]} dealing ${damage} damage.`
+                     + "```"
+                );
                 return attackerHP -= damage;
 
             }
@@ -193,11 +198,16 @@ module.exports.run = async (bot, message, args) => {
                     damageStatement = `dealing ${damage} damage`;
                 }
                 console.log(damage, attackerHP, defenderHP)
-                var embed = new Discord.RichEmbed()
-                    .setTitle(`${toDuel1}(${defenderHP}hp)`)
-                    .setDescription(`${toDuel1} ${projectileActions[projectileActionSlot]} ${item} aimed at ${duelEE1}(${attackerHP}hp)'s ${bodyParts[bodyHit]}, ${damageStatement}`)
-                    .setColor(color)
-                message.channel.send({embed: embed});
+                // var embed = new Discord.RichEmbed()
+                //     .setTitle(`${toDuel1}(${defenderHP}hp)`)
+                //     .setDescription(`${toDuel1} ${projectileActions[projectileActionSlot]} ${item} aimed at ${duelEE1}(${attackerHP}hp)'s ${bodyParts[bodyHit]}, ${damageStatement}`)
+                //     .setColor(color)
+                // message.channel.send({embed: embed});
+                message.channel.send(
+                    "```html\n" + `<${toDuel1} (${defenderHP}hp)>\n`+ 
+                    `<${toDuel1} (${defenderHP}hp)> ${projectileActions[projectileActionSlot]} ${item} aimed at <${duelEE1} (${attackerHP}hp)>'s ${bodyParts[bodyHit]}, ${damageStatement}`
+                     + "```"
+                );
                 return attackerHP -= damage;
 
             }
@@ -206,23 +216,33 @@ module.exports.run = async (bot, message, args) => {
                 bodyHit = randomInt(0,bodyParts.length -1);
                 damage = randomInt(3,4);
                 console.log(damage, attackerHP, defenderHP)
-                var embed = new Discord.RichEmbed()
-                    .setTitle(`${toDuel1}(${defenderHP}hp)`)
-                    .setDescription(`${toDuel1} ${bodyActions[bodyActionSlot]} ${duelEE1}(${attackerHP}hp)'s ${bodyParts[bodyHit]} dealing ${damage}`)
-                    .setColor(color)
-                message.channel.send({embed: embed});
+                // var embed = new Discord.RichEmbed()
+                //     .setTitle(`${toDuel1}(${defenderHP}hp)`)
+                //     .setDescription(`${toDuel1} ${bodyActions[bodyActionSlot]} ${duelEE1}(${attackerHP}hp)'s ${bodyParts[bodyHit]} dealing ${damage}`)
+                //     .setColor(color)
+                // message.channel.send({embed: embed});
+                message.channel.send(
+                    "```html\n" + `<${toDuel1} (${defenderHP}hp)>\n`+ 
+                    `<${toDuel1} (${defenderHP}hp)> ${bodyActions[bodyActionSlot]} <${duelEE1} (${attackerHP}hp)>'s ${bodyParts[bodyHit]} dealing ${damage}`
+                     + "```"
+                );
                 return attackerHP -= damage;
                 
             }
             else if(scenario == 3){
                 damage = randomInt(3,4);
                 specificActionsSlot = randomInt(0,specificActions.length-1);
-                console.log(damage, attackerHP, defenderHP)
-                var embed = new Discord.RichEmbed()
-                    .setTitle(`${toDuel1}(${defenderHP}hp)`)
-                    .setDescription(`${specificActions[specificActionsSlot]}, dealing ${damage}`)
-                    .setColor(color)
-                message.channel.send({embed: embed});
+                // console.log(damage, attackerHP, defenderHP)
+                // var embed = new Discord.RichEmbed()
+                //     .setTitle(`${toDuel1}(${defenderHP}hp)`)
+                //     .setDescription(`${specificActions[specificActionsSlot]}, dealing ${damage}`)
+                //     .setColor(color)
+                // message.channel.send({embed: embed});
+                message.channel.send(
+                    "```html\n" + `<${toDuel1} (${defenderHP}hp)>\n`+ 
+                    `${specificActions[specificActionsSlot]}, dealing ${damage}`
+                     + "```"
+                );
                 return attackerHP -= damage;
             } 
     }
@@ -257,11 +277,13 @@ module.exports.run = async (bot, message, args) => {
 
     
     while(done == false){
+        wait(1000);
         while(done == false && turn === 0){
             healthOne = play(duelEE.username, toDuel.user.username, healthOne, healthZero, color0);
             await win_check();
             turn = 1;
         }
+        wait(1000);
         while(done == false && turn === 1){
             healthZero = play(toDuel.user.username, duelEE.username, healthZero, healthOne, color1);
             await win_check();
