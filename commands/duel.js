@@ -28,8 +28,6 @@ module.exports.run = async (bot, message, args) => {
         "monitor", "spanish dildo", "volleyball", "KNOWLEDGE", "Coke", "Pepsi", "basketball",
         "pencil", "pen", "staple", "ceramic pot", "paperclip", "iPhone 4S", "shuriken"];
 
-
-
     var duelEE = message.author;
     var toDuel = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
     
@@ -187,11 +185,11 @@ module.exports.run = async (bot, message, args) => {
                 }
                 else {damage = randomInt(0,5);}
 
-                if(damage <= 3){
-                    damage = 0;
+                if(damage = 0){
                     damageStatement = `missing`;
                 }
                 else{
+                    damage = randomInt(3,5);
                     damageStatement = `dealing ${damage} damage`;
                 }
                 console.log(damage, attackerHP, defenderHP)
