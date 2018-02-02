@@ -141,8 +141,8 @@ module.exports.run = async (bot, message, args) => {
             });
         }
     }
-    function play(message1, toDuel1, duelEE1, attackerHP, defenderHP, color){
-            var specificActions = [`${toDuel1}(${defenderHP}hp) took <${duelEE1} (${attackerHP}hp)> to McDonalds`,
+    function play(toDuel1, duelEE1, attackerHP, defenderHP, color){
+            var specificActions = [`<${toDuel1} (${defenderHP}hp)> took <${duelEE1} (${attackerHP}hp)> to McDonalds`,
             `<${toDuel1} (${defenderHP}hp)> installed Vosteran on <${duelEE1} (${attackerHP}hp)>'s computer`,
             `<${toDuel1} (${defenderHP}hp)> downvoted <${duelEE1} (${attackerHP}hp)>'s Reddit post`,
             `<${toDuel1} (${defenderHP}hp)> convinced <${duelEE1} (${attackerHP}hp)> to not commit suicide`];
@@ -166,7 +166,7 @@ module.exports.run = async (bot, message, args) => {
                 //     .setDescription(`${toDuel1} ${withActions[withActionSlot]} ${duelEE1}(${attackerHP}hp) with a ${items[itemUsed]} dealing ${damage} damage.`)
                 //     .setColor(color)
                 // message.channel.send({embed: embed});
-                var combatLog = await message1.channel.send(
+                message.channel.send(
                     "```html\n" + `<${toDuel1} (${defenderHP}hp)>\n`+ 
                     `<${toDuel1} (${defenderHP})> ${withActions[withActionSlot]} <${duelEE1} (${attackerHP}hp)> with a ${items[itemUsed]} dealing ${damage} damage.`
                      + "```"
@@ -203,7 +203,7 @@ module.exports.run = async (bot, message, args) => {
                 //     .setDescription(`${toDuel1} ${projectileActions[projectileActionSlot]} ${item} aimed at ${duelEE1}(${attackerHP}hp)'s ${bodyParts[bodyHit]}, ${damageStatement}`)
                 //     .setColor(color)
                 // message.channel.send({embed: embed});
-                var combatLog = await message1.channel.send(
+                message.channel.send(
                     "```html\n" + `<${toDuel1} (${defenderHP}hp)>\n`+ 
                     `<${toDuel1} (${defenderHP}hp)> ${projectileActions[projectileActionSlot]} ${item} aimed at <${duelEE1} (${attackerHP}hp)>'s ${bodyParts[bodyHit]}, ${damageStatement}`
                      + "```"
@@ -221,7 +221,7 @@ module.exports.run = async (bot, message, args) => {
                 //     .setDescription(`${toDuel1} ${bodyActions[bodyActionSlot]} ${duelEE1}(${attackerHP}hp)'s ${bodyParts[bodyHit]} dealing ${damage}`)
                 //     .setColor(color)
                 // message.channel.send({embed: embed});
-                var combatLog = await message1.channel.send(
+                message.channel.send(
                     "```html\n" + `<${toDuel1} (${defenderHP}hp)>\n`+ 
                     `<${toDuel1} (${defenderHP}hp)> ${bodyActions[bodyActionSlot]} <${duelEE1} (${attackerHP}hp)>'s ${bodyParts[bodyHit]} dealing ${damage}`
                      + "```"
@@ -238,7 +238,7 @@ module.exports.run = async (bot, message, args) => {
                 //     .setDescription(`${specificActions[specificActionsSlot]}, dealing ${damage}`)
                 //     .setColor(color)
                 // message.channel.send({embed: embed});
-                var combatLog = await message1.channel.send(
+                message.channel.send(
                     "```html\n" + `<${toDuel1} (${defenderHP}hp)>\n`+ 
                     `${specificActions[specificActionsSlot]}, dealing ${damage}`
                      + "```"
@@ -279,13 +279,13 @@ module.exports.run = async (bot, message, args) => {
     while(done == false){
 
         while(done == false && turn === 0){
-            healthOne = play(message, duelEE.username, toDuel.user.username, healthOne, healthZero, color0);
+            healthOne = play(duelEE.username, toDuel.user.username, healthOne, healthZero, color0);
             await win_check();
             turn = 1;
         }
 
         while(done == false && turn === 1){
-            healthZero = play(message, toDuel.user.username, duelEE.username, healthZero, healthOne, color1);
+            healthZero = play(toDuel.user.username, duelEE.username, healthZero, healthOne, color1);
             await win_check();
             turn = 0;
         }
