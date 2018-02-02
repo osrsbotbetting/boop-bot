@@ -179,7 +179,7 @@ module.exports.run = async (bot, message, args) => {
                 else{
                     damage = randomInt(3,4);
                 }
-                await console.log(damage, attackerHP, defenderHP)
+                console.log(damage, attackerHP, defenderHP)
                 var embed = await new Discord.RichEmbed()
                     .setTitle(`${toDuel1} (${defenderHP}hp)`)
                     .setDescription(`${toDuel1} ${withActions[withActionSlot]} ${duelEE1}(${attackerHP}hp) with a ${items[itemUsed]} dealing ${damage} damage.`)
@@ -216,7 +216,7 @@ module.exports.run = async (bot, message, args) => {
                     damage = randomInt(4,5);
                     damageStatement = `dealing ${damage} damage`;
                 }
-                await console.log(damage, attackerHP, defenderHP)
+                console.log(damage, attackerHP, defenderHP)
                 var embed = await new Discord.RichEmbed()
                     .setTitle(`${toDuel1} (${defenderHP}hp)`)
                     .setDescription(`${toDuel1} ${projectileActions[projectileActionSlot]} ${item} aimed at ${duelEE1}(${attackerHP}hp)'s ${bodyParts[bodyHit]}, ${damageStatement}`)
@@ -234,7 +234,7 @@ module.exports.run = async (bot, message, args) => {
                 bodyActionSlot = randomInt(0,bodyActions.length -1);
                 bodyHit = randomInt(0,bodyParts.length -1);
                 damage = randomInt(4,5);
-                await console.log(damage, attackerHP, defenderHP)
+                console.log(damage, attackerHP, defenderHP)
                 var embed = await new Discord.RichEmbed()
                     .setTitle(`${toDuel1} (${defenderHP}hp)`)
                     .setDescription(`${toDuel1} ${bodyActions[bodyActionSlot]} ${duelEE1}(${attackerHP}hp)'s ${bodyParts[bodyHit]} dealing ${damage}`)
@@ -251,7 +251,7 @@ module.exports.run = async (bot, message, args) => {
             else if(scenario == 3){
                 damage = randomInt(4,5);
                 specificActionsSlot = randomInt(0,specificActions.length-1);
-                await console.log(damage, attackerHP, defenderHP)
+                console.log(damage, attackerHP, defenderHP)
                 var embed = await new Discord.RichEmbed()
                     .setTitle(`${toDuel1} (${defenderHP}hp)`)
                     .setDescription(`${specificActions[specificActionsSlot]}, dealing ${damage}`)
