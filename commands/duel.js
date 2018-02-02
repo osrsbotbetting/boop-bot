@@ -70,7 +70,7 @@ module.exports.run = async (bot, message, args) => {
     else if(toDuel.user.tag == bot.user.tag && args[1] != "profile"){
         return message.channel.send("You may not duel the bot.");
     }
-    else if(toDuel.user.tag != process.env.BOT_MAKER && args[1] != "profile"){
+    else if(toDuel.user.tag != "🆇🅴🆁🅺🆉#0428" && args[1] != "profile"){
         return message.channel.send("You may not duel yourself.");
     }
 
@@ -154,17 +154,20 @@ module.exports.run = async (bot, message, args) => {
         }
     }
     async function play(toDuel1, duelEE1, attackerHP, defenderHP, color){
-            wait(1500);
+            //
             //for html codeblock
-            // const specificActions = [`<${toDuel1} (${defenderHP}hp)> took <${duelEE1} (${attackerHP}hp)> to McDonalds`,
+            // const specificActions = [`<${toDuel1} (${defenderHP}hp)> convinced <${duelEE1} (${attackerHP}hp)> to not commit suicide`,
+            // `<${toDuel1} (${defenderHP}hp)> took <${duelEE1} (${attackerHP}hp)> to McDonalds`,
             // `<${toDuel1} (${defenderHP}hp)> installed Vosteran on <${duelEE1} (${attackerHP}hp)>'s computer`,
             // `<${toDuel1} (${defenderHP}hp)> downvoted <${duelEE1} (${attackerHP}hp)>'s Reddit post`,
-            // `<${toDuel1} (${defenderHP}hp)> convinced <${duelEE1} (${attackerHP}hp)> to not commit suicide`];
+            // `<${toDuel1} (${defenderHP}hp)> gave <${duelEE1} (${attackerHP})> trypophobia`];
             //for RichEmbed
-            const specificActions = [`${toDuel1} (${defenderHP}hp) took ${duelEE1} (${attackerHP}hp) to McDonalds`,
+            const specificActions = [`${toDuel1} (${defenderHP}hp) convinced ${duelEE1} (${attackerHP}hp) to not commit suicide`,
+            `${toDuel1} (${defenderHP}hp) took ${duelEE1} (${attackerHP}hp) to McDonalds`,
             `${toDuel1} (${defenderHP}hp) installed Vosteran on ${duelEE1} (${attackerHP}hp)'s computer`,
             `${toDuel1} (${defenderHP}hp) downvoted ${duelEE1} (${attackerHP}hp)'s Reddit post`,
-            `${toDuel1} (${defenderHP}hp) convinced ${duelEE1} (${attackerHP}hp) to not commit suicide`];
+            `${toDuel1} (${defenderHP}hp) gave ${duelEE1} (${attackerHP}) trypophobia`];
+            
             let scenario = await randomInt(0,3);
             console.log(scenario);
             if(scenario == 0){
@@ -179,7 +182,7 @@ module.exports.run = async (bot, message, args) => {
                 else{
                     damage = randomInt(3,4);
                 }
-                console.log(damage, attackerHP, defenderHP)
+                await console.log(damage, attackerHP, defenderHP);
                 var embed = await new Discord.RichEmbed()
                     .setTitle(`${toDuel1} (${defenderHP}hp)`)
                     .setDescription(`${toDuel1} ${withActions[withActionSlot]} ${duelEE1}(${attackerHP}hp) with a ${items[itemUsed]} dealing ${damage} damage.`)
@@ -190,6 +193,7 @@ module.exports.run = async (bot, message, args) => {
                 //     `<${toDuel1} (${defenderHP})> ${withActions[withActionSlot]} <${duelEE1} (${attackerHP}hp)> with a ${items[itemUsed]} dealing ${damage} damage.`
                 //      + "```"
                 // );
+                wait(1500);
                 return attackerHP -= damage;
 
             }
@@ -216,7 +220,7 @@ module.exports.run = async (bot, message, args) => {
                     damage = randomInt(4,5);
                     damageStatement = `dealing ${damage} damage`;
                 }
-                console.log(damage, attackerHP, defenderHP)
+                await console.log(damage, attackerHP, defenderHP);
                 var embed = await new Discord.RichEmbed()
                     .setTitle(`${toDuel1} (${defenderHP}hp)`)
                     .setDescription(`${toDuel1} ${projectileActions[projectileActionSlot]} ${item} aimed at ${duelEE1}(${attackerHP}hp)'s ${bodyParts[bodyHit]}, ${damageStatement}`)
@@ -227,6 +231,7 @@ module.exports.run = async (bot, message, args) => {
                 //     `<${toDuel1} (${defenderHP}hp)> ${projectileActions[projectileActionSlot]} ${item} aimed at <${duelEE1} (${attackerHP}hp)>'s ${bodyParts[bodyHit]}, ${damageStatement}`
                 //      + "```"
                 // );
+                wait(1500);
                 return attackerHP -= damage;
 
             }
@@ -234,7 +239,7 @@ module.exports.run = async (bot, message, args) => {
                 bodyActionSlot = randomInt(0,bodyActions.length -1);
                 bodyHit = randomInt(0,bodyParts.length -1);
                 damage = randomInt(4,5);
-                console.log(damage, attackerHP, defenderHP)
+                await console.log(damage, attackerHP, defenderHP);
                 var embed = await new Discord.RichEmbed()
                     .setTitle(`${toDuel1} (${defenderHP}hp)`)
                     .setDescription(`${toDuel1} ${bodyActions[bodyActionSlot]} ${duelEE1}(${attackerHP}hp)'s ${bodyParts[bodyHit]} dealing ${damage}`)
@@ -245,13 +250,32 @@ module.exports.run = async (bot, message, args) => {
                 //     `<${toDuel1} (${defenderHP}hp)> ${bodyActions[bodyActionSlot]} <${duelEE1} (${attackerHP}hp)>'s ${bodyParts[bodyHit]} dealing ${damage}`
                 //      + "```"
                 // );
+                wait(1500);
                 return attackerHP -= damage;
                 
             }
             else if(scenario == 3){
                 damage = randomInt(4,5);
                 specificActionsSlot = randomInt(0,specificActions.length-1);
-                console.log(damage, attackerHP, defenderHP)
+                if(specificActionsSlot == 0){
+                    suicideChance = randomInt(0,199);
+                    if(suicideChance == 69){
+                        await console.log(damage, attackerHP, defenderHP);
+                        var embed = await new Discord.RichEmbed()
+                            .setTitle(`${toDuel1} (${defenderHP}hp)`)
+                            .setDescription(`${toDuel1} (${defenderHP}hp) failed to convince ${duelEE1} (${attackerHP}hp) from suiciding`)
+                            .setColor("#fd013e")
+                        await message.channel.send({embed: embed});
+                        // await message.channel.send(
+                        //     "```html\n" + //`<${toDuel1} (${defenderHP}hp)>\n`+ 
+                        //     `${toDuel1} (${defenderHP}hp) failed to convince ${duelEE1} (${attackerHP}hp) from suiciding`
+                        //      + "```"
+                        // );
+                        wait(1500);
+                        return attackerHP = 0;    
+                    }
+                }
+                await console.log(damage, attackerHP, defenderHP);
                 var embed = await new Discord.RichEmbed()
                     .setTitle(`${toDuel1} (${defenderHP}hp)`)
                     .setDescription(`${specificActions[specificActionsSlot]}, dealing ${damage}`)
@@ -262,6 +286,7 @@ module.exports.run = async (bot, message, args) => {
                 //     `${specificActions[specificActionsSlot]}, dealing ${damage}`
                 //      + "```"
                 // );
+                wait(1500);
                 return attackerHP -= damage;
             } 
     }
