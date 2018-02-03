@@ -116,7 +116,7 @@ module.exports.run = async (bot, message, args) => {
                 bot.levelD[toDuel.id].losses += 0;
 
                 bot.levelD[duelEE.id].exp += 5;
-                bot.levelD[duelEE.id].level = Math.floor(0.2 * Math.sqrt(bot.levelD[toDuel.id].exp)) + 1;
+                bot.levelD[duelEE.id].level = Math.floor(0.2 * Math.sqrt(bot.levelD[duelEE.id].exp)) + 1;
                 bot.levelD[duelEE.id].wins += 0;
                 bot.levelD[duelEE.id].losses += 1;
                 fs.writeFile("./levelD.json", JSON.stringify(bot.levelD, null, 4), err => {
@@ -139,7 +139,7 @@ module.exports.run = async (bot, message, args) => {
                 bot.levelD[toDuel.id].losses += 1;
 
                 bot.levelD[duelEE.id].exp += 10;
-                bot.levelD[duelEE.id].level = Math.floor(0.2 * Math.sqrt(bot.levelD[toDuel.id].exp)) + 1;
+                bot.levelD[duelEE.id].level = Math.floor(0.2 * Math.sqrt(bot.levelD[duelEE.id].exp)) + 1;
                 bot.levelD[duelEE.id].wins += 1;
                 bot.levelD[duelEE.id].losses += 0;
                 fs.writeFile("./levelD.json", JSON.stringify(bot.levelD, null, 4), err => {
