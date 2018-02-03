@@ -17,7 +17,7 @@ decline = "❎";
 module.exports.run = async (bot, message, args) => {
     healthZero = 20;
     healthOne = 20;
-    var bodyActions = ["licks", "farted on", "puked on", "pissed on", "shat on", "kisses", "rubs", "sucks on", "wetts"];
+    var bodyActions = ["blows on", "tickles", "licks", "farted on", "puked on", "pissed on", "shat on", "kisses", "rubs", "sucks on", "wetts"];
     var bodyParts = ["foot", "head", "elbow", "thigh", "toes", "thumb", "fingers", "finger", "palm",
         "ear", "nose", "knee", "ankle", "shoulder", "face", "hand", "butt", "belly button", "stolen car"];
 
