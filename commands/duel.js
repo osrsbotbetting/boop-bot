@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
     healthOne = 20;
     var bodyActions = ["licks", "farted on", "puked on", "pissed on", "shat on", "kisses", "rubs", "sucks on", "wetts"];
     var bodyParts = ["foot", "head", "elbow", "thigh", "toes", "thumb", "fingers", "finger", "palm",
-        "ear", "nose", "knee", "ankle", "shoulder", "face", "hand", "butt", "belly button"];
+        "ear", "nose", "knee", "ankle", "shoulder", "face", "hand", "butt", "belly button", "stolen car"];
 
     var withActions = ["stabs", "slaps", "pokes", "rubs"];
     var projectileActions = ["throws a", "drop kicks a", "catapults a", "fires a"];
@@ -215,7 +215,8 @@ module.exports.run = async (bot, message, args) => {
                 }
                 else {damage = randomInt(0,99);}//100% attack(note: randomInt is inclusive) 
 
-                if(damage <= 14){//15%miss chance
+                if(damage <= 9){//10%miss chance
+                    damage = 0;
                     damageStatement = `missing`;
                 }
                 else{
@@ -262,6 +263,7 @@ module.exports.run = async (bot, message, args) => {
                 if(specificActionsSlot == 0){
                     suicideChance = randomInt(0,99);
                     if(suicideChance == 69){
+                        damage = 0
                         await console.log(damage, attackerHP, defenderHP);
                         var embed = await new Discord.RichEmbed()
                             .setTitle(`${toDuel1} (${defenderHP}hp)`)
