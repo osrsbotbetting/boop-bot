@@ -70,7 +70,7 @@ module.exports.run = async (bot, message, args) => {
     else if(toDuel.user.tag == bot.user.tag && args[1] != "profile"){
         return message.channel.send("You may not duel the bot.");
     }
-    else if(toDuel.user.tag != "🆇🅴🆁🅺🆉#0428" && args[1] != "profile"){
+    else if(toDuel.user.tag != "process.env.BOT_MAKER" && args[1] != "profile"){
         return message.channel.send("You may not duel yourself.");
     }
 
@@ -164,6 +164,7 @@ module.exports.run = async (bot, message, args) => {
             //for RichEmbed
             const specificActions = [`${toDuel1} (${defenderHP}hp) convinced ${duelEE1} (${attackerHP}hp) to not commit suicide`,
             `${toDuel1} (${defenderHP}hp) took ${duelEE1} (${attackerHP}hp) to McDonalds`,
+            `${toDuel1} (${defenderHP}hp) took ${duelEE1} (${attackerHP}hp) to Walmart`,
             `${toDuel1} (${defenderHP}hp) installed Vosteran on ${duelEE1} (${attackerHP}hp)'s computer`,
             `${toDuel1} (${defenderHP}hp) downvoted ${duelEE1} (${attackerHP}hp)'s Reddit post`,
             `${toDuel1} (${defenderHP}hp) gave ${duelEE1} (${attackerHP}) trypophobia`];
@@ -258,7 +259,7 @@ module.exports.run = async (bot, message, args) => {
                 damage = randomInt(4,5);
                 specificActionsSlot = randomInt(0,specificActions.length-1);
                 if(specificActionsSlot == 0){
-                    suicideChance = randomInt(0,199);
+                    suicideChance = randomInt(0,99);
                     if(suicideChance == 69){
                         await console.log(damage, attackerHP, defenderHP);
                         var embed = await new Discord.RichEmbed()
