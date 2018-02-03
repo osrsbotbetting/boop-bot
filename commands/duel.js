@@ -70,7 +70,7 @@ module.exports.run = async (bot, message, args) => {
     else if(toDuel.user.tag == bot.user.tag && args[1] != "profile"){
         return message.channel.send("You may not duel the bot.");
     }
-    else if(toDuel.user.tag == duelEE.tag && args[1] != "profile" && duelEE.tag != process.env.BOT_MAKER){
+    else if(toDuel.user.tag == duelEE.tag && args[1] != "profile" && duelEE.tag != "process.env.BOT_MAKER"){
         return message.channel.send("You may not duel yourself.");
     }
 
