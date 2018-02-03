@@ -70,7 +70,7 @@ module.exports.run = async (bot, message, args) => {
     else if(toDuel.user.tag == bot.user.tag && args[1] != "profile"){
         return message.channel.send("You may not duel the bot.");
     }
-    else if(toDuel.user.tag == duelEE.tag && args[1] != "profile"){
+    else if(toDuel.user.tag == duelEE.tag && args[1] != "profile" && duelEE.tag != process.env.BOT_MAKER){
         return message.channel.send("You may not duel yourself.");
     }
 
@@ -158,6 +158,7 @@ module.exports.run = async (bot, message, args) => {
             //for html codeblock
             // const specificActions = [`<${toDuel1} (${defenderHP}hp)> convinced <${duelEE1} (${attackerHP}hp)> to not commit suicide`,
             // `<${toDuel1} (${defenderHP}hp)> took <${duelEE1} (${attackerHP}hp)> to McDonalds`,
+            // `<${toDuel1} (${defenderHP}hp)> took <${duelEE1} (${attackerHP}hp)> to Walmart`,
             // `<${toDuel1} (${defenderHP}hp)> installed Vosteran on <${duelEE1} (${attackerHP}hp)>'s computer`,
             // `<${toDuel1} (${defenderHP}hp)> downvoted <${duelEE1} (${attackerHP}hp)>'s Reddit post`,
             // `<${toDuel1} (${defenderHP}hp)> gave <${duelEE1} (${attackerHP})> trypophobia`];
