@@ -4,7 +4,7 @@ const prefix = "!";
 module.exports.run = async (bot, message, args) => {
     var clist = [];
     var cinfo = [" @ : Displays user's avatar", " (@)/(profile) : Duels another user/ view dueling profiles",
-    " : Displays Bot commands", " @/# : Mutes a user", "(cc/ud)/#/? : Create a poll", "@ : Not functional atm",
+    " : Displays Bot commands", " @/# : Mutes a user", "(cc/ud)/#/? : Create a poll",
     " @ : Unmutes a user", " @/Id : Displays user's info"
     ];
     fs.readdir("./commands/", (err, files) => {
