@@ -80,7 +80,7 @@ module.exports.run = async (bot, message, args) => {
             msg.clearReactions();
             msg.edit("```diff\n- Poll Expired -\n```");
             return message.channel.send("\n```asciidoc\n= Poll Results =" + `\n${question}` +
-                `\n${optionOne} : ${answer[0]}     ${resultOne} Votes` + "\n```");
+                `\n${optionOne} : ${answer[0]}     [${resultOne} Votes]` + "\n```");
         }
         else if(answer.length == 2){
             if(reactions.get(optionOne) == undefined){
@@ -94,8 +94,8 @@ module.exports.run = async (bot, message, args) => {
             msg.clearReactions();
             msg.edit("```diff\n- Poll Expired -\n```");
             return message.channel.send("\n```asciidoc\n= Poll Results =" + `\n${question}` +
-                `\n${optionOne} : ${answer[0]}     ${resultOne} Votes` +
-                `\n${optionTwo} : ${answer[1]}     ${resultTwo} Votes` + "\n```");
+                `\n${optionOne} : ${answer[0]}     [${resultOne} Votes]` +
+                `\n${optionTwo} : ${answer[1]}     [${resultTwo} Votes]` + "\n```");
         }
         else if(answer.length == 3){
             if(reactions.get(optionOne) == undefined){
@@ -137,10 +137,10 @@ module.exports.run = async (bot, message, args) => {
             msg.clearReactions();
             msg.edit("```diff\n- Poll Expired -\n```");
             return message.channel.send("\n```asciidoc\n= Poll Results =" + `\n${question}` +
-                `\n${optionOne} : ${answer[0]}     ${resultOne} Votes` +
-                `\n${optionTwo} : ${answer[1]}     ${resultTwo} Votes` +
-                `\n${optionThree} : ${answer[2]}     ${resultThree} Votes` +
-                `\n${optionFour} : ${answer[3]}     ${resultFour} Votes` + "\n```");
+                `\n${optionOne} : ${answer[0]}     [${resultOne} Votes]` +
+                `\n${optionTwo} : ${answer[1]}     [${resultTwo} Votes]` +
+                `\n${optionThree} : ${answer[2]}     [${resultThree} Votes]` +
+                `\n${optionFour} : ${answer[3]}     [${resultFour} Votes]` + "\n```");
         }
     }
     else{
