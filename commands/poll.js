@@ -69,7 +69,7 @@ module.exports.run = async (bot, message, args) => {
 
     var reactions = await msg.awaitReactions((reaction, user) => (reaction.emoji.name == agree || reaction.emoji.name == disagree ||
         reaction.emoji.name == optionOne || reaction.emoji.name == optionTwo || reaction.emoji.name == optionThree ||
-        reaction.emoji.name == optionFour) , {time: timer});
+        reaction.emoji.name == optionFour) , {max: 7, time: timer});
 
     if(args[0] == "mc"){
         if(answer.length == 1){
