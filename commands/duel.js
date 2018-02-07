@@ -168,7 +168,8 @@ module.exports.run = async (bot, message, args) => {
             `${toDuel1} (${defenderHP}hp) took ${duelEE1} (${attackerHP}hp) to Walmart`,
             `${toDuel1} (${defenderHP}hp) installed Vosteran on ${duelEE1} (${attackerHP}hp)'s computer`,
             `${toDuel1} (${defenderHP}hp) downvoted ${duelEE1} (${attackerHP}hp)'s Reddit post`,
-            `${toDuel1} (${defenderHP}hp) gave ${duelEE1} (${attackerHP}) trypophobia`];
+            `${toDuel1} (${defenderHP}hp) gave ${duelEE1} (${attackerHP}) trypophobia`,
+            `${toDuel1} (${defenderHP}hp) pushed ${duelEE1} (${attackerHP}) into a lake`];
             
             let scenario = await randomInt(0,3);
             console.log(scenario);
