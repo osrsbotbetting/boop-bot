@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
     " : Displays Bot commands",
     " @/# : Mutes a user",
     "(cc/ud/mc)/#/?/ans : Create a poll",
-    "#~# : Generates a random number in range",
+    "#~#(')#') : Generates a random number in range",
     " @ : Unmutes a user", " @/Id : Displays user's info"
     ];
     fs.readdir("./commands/", (err, files) => {
