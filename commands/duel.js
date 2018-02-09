@@ -31,8 +31,16 @@ module.exports.run = async (bot, message, args) => {
     var duelEE = message.author;
     var toDuel = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
     
-    if( !toDuel && args[1] == undefined && args[0] != "profile"){
+    if( !toDuel && args[1] == undefined && args[0] != "profile" && args[0] != "history"){
         return message.channel.send("Specify a user mention or ID.");
+    }
+    else if(!toDuel && args[0] == "history"){
+        var embed = new Discord.RichEmbed();
+        embed.setColor("#ecbe00");
+        for(i in bot.historyD){
+            embed.addField(bot.historyD[i].outcome, bot.historyD[i].time, false);
+        }
+        return message.channel.send({embed: embed});
     }
     else if (args[0] == "profile" && !toDuel){
         if(bot.levelD[duelEE.id] == undefined){
@@ -91,7 +99,7 @@ module.exports.run = async (bot, message, args) => {
             losses: 0
         }
     }
-    if(!bot.levelD[duelEE.id]){
+    if (!bot.levelD[duelEE.id]){
         bot.levelD[duelEE.id] = {
             guild: message.guild.id,
             exp: 0,
@@ -100,75 +108,94 @@ module.exports.run = async (bot, message, args) => {
             losses: 0
         }
     }
+
+    for(let i in bot.historyD) {
+        let outcome = ""
+        let time = bot.historyD[i].time;
+    };
+
     fs.writeFile("./levelD.json", JSON.stringify(bot.levelD, null, 4), err => {
         if(err) throw err; 
         console.log(`${toDuel.user.tag} has been challenged to a duel.`)
     });
 
-    function win_check(){
-        if(healthZero < 1 ){
-            if(toDuel.user.tag != duelEE.tag){
-                message.channel.send("```md\n" + "# Duel Complete #\n" + `${toDuel.user.tag}(${healthOne}hp) has won the duel against ${duelEE.tag}` + "\n```");
-                done = true;
-                bot.levelD[toDuel.id].exp += 10;
-                bot.levelD[toDuel.id].level = Math.floor(0.2 * Math.sqrt(bot.levelD[toDuel.id].exp)) + 1;
-                bot.levelD[toDuel.id].wins += 1;
-                bot.levelD[toDuel.id].losses += 0;
+    function win_check(toDuel1, toDuel2, duelEE1, duelEE2, attackerHP, defenderHP){
+        gameTime = Date();
+        historyDlength = 0;
+        if(defenderHP < 1 ){
+            done = true;
+            if(toDuel2 != duelEE2){
+                for(i in bot.historyD){
+                    historyDlength ++
+                }
+                console.log(historyDlength);
+                if(bot.historyD[0]){
+                    for(let x=historyDlength-1; x >= 0; x--){
+                        bot.historyD[x+1] = {
+                            outcome : bot.historyD[x].outcome,
+                            time : bot.historyD[x].time
+                        }
+                    }
+                }
+                bot.historyD[0] = {
+                    outcome: `${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}`,
+                    time : gameTime
+                }
+                fs.writeFile("./historyD.json", JSON.stringify(bot.historyD, null, 4), err => {
+                    if(err) throw err; 
+                    console.log(`Data saved.`);
+                });
+                message.channel.send("```md\n" + "# Duel Complete #\n" + `${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}` + "\n```");
+                bot.levelD[toDuel1].exp += 10;
+                bot.levelD[toDuel1].level = Math.floor(0.2 * Math.sqrt(bot.levelD[toDuel1].exp)) + 1;
+                bot.levelD[toDuel1].wins += 1;
+                bot.levelD[toDuel1].losses += 0;
 
-                bot.levelD[duelEE.id].exp += 5;
-                bot.levelD[duelEE.id].level = Math.floor(0.2 * Math.sqrt(bot.levelD[duelEE.id].exp)) + 1;
-                bot.levelD[duelEE.id].wins += 0;
-                bot.levelD[duelEE.id].losses += 1;
+                bot.levelD[duelEE1].exp += 5;
+                bot.levelD[duelEE1].level = Math.floor(0.2 * Math.sqrt(bot.levelD[duelEE1].exp)) + 1;
+                bot.levelD[duelEE1].wins += 0;
+                bot.levelD[duelEE1].losses += 1;
                 fs.writeFile("./levelD.json", JSON.stringify(bot.levelD, null, 4), err => {
                     if(err) throw err; 
                     console.log(`Data saved.`);
                 });
             }
             else{
-                message.channel.send("```md\n" + "# Duel Complete #\n" + `${toDuel.user.tag}(${healthOne}hp) has won the duel against ${duelEE.tag}` + "\n```");
-                done = true;                
-            }
-        }
-        else if(healthOne < 1 ){
-            if (toDuel.user.tag != duelEE.tag){
-                message.channel.send("```md\n" + "# Duel Complete #\n" + `${duelEE.tag}(${healthZero}hp) has won the duel against ${toDuel.user.tag}` + "\n```");
-                done = true;  
-                bot.levelD[toDuel.id].exp += 5;
-                bot.levelD[toDuel.id].level = Math.floor(0.2 * Math.sqrt(bot.levelD[toDuel.id].exp)) + 1;
-                bot.levelD[toDuel.id].wins += 0;
-                bot.levelD[toDuel.id].losses += 1;
-
-                bot.levelD[duelEE.id].exp += 10;
-                bot.levelD[duelEE.id].level = Math.floor(0.2 * Math.sqrt(bot.levelD[duelEE.id].exp)) + 1;
-                bot.levelD[duelEE.id].wins += 1;
-                bot.levelD[duelEE.id].losses += 0;
-                fs.writeFile("./levelD.json", JSON.stringify(bot.levelD, null, 4), err => {
+                message.channel.send("```md\n" + "# Duel Complete #\n" + `${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}` + "\n```");
+                for(i in bot.historyD){
+                    historyDlength ++
+                }
+                console.log(historyDlength);
+                if(bot.historyD[0]){
+                    for(let x=historyDlength-1; x >= 0; x--){
+                        bot.historyD[x+1] = {
+                            outcome : bot.historyD[x].outcome,
+                            time : bot.historyD[x].time
+                        }
+                    }
+                }
+                bot.historyD[0] = {
+                    outcome: `${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}`,
+                    time : gameTime
+                }
+                if(bot.historyD[10]){
+                    delete bot.historyD[10];
+                }
+                fs.writeFile("./historyD.json", JSON.stringify(bot.historyD, null, 4), err => {
                     if(err) throw err; 
                     console.log(`Data saved.`);
                 });
             }
-            else {
-                message.channel.send("```md\n" + "# Duel Complete #\n" + `${duelEE.tag}(${healthZero}hp) has won the duel against ${toDuel.user.tag}` + "\n```");
-                done = true;                
-            }
         }
     }
     async function play(toDuel1, duelEE1, attackerHP, defenderHP, color){
-            //
-            //for html codeblock
-            // const specificActions = [`<${toDuel1} (${defenderHP}hp)> convinced <${duelEE1} (${attackerHP}hp)> to not commit suicide`,
-            // `<${toDuel1} (${defenderHP}hp)> took <${duelEE1} (${attackerHP}hp)> to McDonalds`,
-            // `<${toDuel1} (${defenderHP}hp)> took <${duelEE1} (${attackerHP}hp)> to Walmart`,
-            // `<${toDuel1} (${defenderHP}hp)> installed Vosteran on <${duelEE1} (${attackerHP}hp)>'s computer`,
-            // `<${toDuel1} (${defenderHP}hp)> downvoted <${duelEE1} (${attackerHP}hp)>'s Reddit post`,
-            // `<${toDuel1} (${defenderHP}hp)> gave <${duelEE1} (${attackerHP})> trypophobia`];
-            //for RichEmbed
             const specificActions = [`${toDuel1} (${defenderHP}hp) convinced ${duelEE1} (${attackerHP}hp) to not commit suicide`,
             `${toDuel1} (${defenderHP}hp) took ${duelEE1} (${attackerHP}hp) to McDonalds`,
             `${toDuel1} (${defenderHP}hp) took ${duelEE1} (${attackerHP}hp) to Walmart`,
             `${toDuel1} (${defenderHP}hp) installed Vosteran on ${duelEE1} (${attackerHP}hp)'s computer`,
             `${toDuel1} (${defenderHP}hp) downvoted ${duelEE1} (${attackerHP}hp)'s Reddit post`,
             `${toDuel1} (${defenderHP}hp) gave ${duelEE1} (${attackerHP}) trypophobia`,
+            `${toDuel1} (${defenderHP}hp) pointed a laser at ${duelEE1} (${attackerHP}), a cat scratched him`,
             `${toDuel1} (${defenderHP}hp) pushed ${duelEE1} (${attackerHP}) into a lake`];
             
             let scenario = await randomInt(0,3);
@@ -324,16 +351,15 @@ module.exports.run = async (bot, message, args) => {
         var done = false;
     }
 
-    
     while(done == false){
         while(done == false && turn === 0){
             healthOne = await play(duelEE.username, toDuel.user.username, healthOne, healthZero, color0);
-            await win_check();
+            await win_check(duelEE.id, duelEE.tag, toDuel.id, toDuel.user.tag, healthZero, healthOne);
             turn = 1;
         }
         while(done == false && turn === 1){
             healthZero = await play(toDuel.user.username, duelEE.username, healthZero, healthOne, color1);
-            await win_check();
+            await win_check(toDuel.id, toDuel.user.tag, duelEE.id, duelEE.tag, healthOne, healthZero);
             turn = 0;
         }
     }
