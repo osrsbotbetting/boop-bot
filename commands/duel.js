@@ -120,7 +120,10 @@ module.exports.run = async (bot, message, args) => {
     });
 
     function win_check(toDuel1, toDuel2, duelEE1, duelEE2, attackerHP, defenderHP){
-        gameTime = Date();
+        gameTime = new Date();
+        options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+            hour: '2-digit', minute: '2-digit', second: '2-digit',
+            timeZone: "America/Los_Angeles", hour12: true}
         historyDlength = 0;
         if(defenderHP < 1 ){
             done = true;
@@ -139,7 +142,8 @@ module.exports.run = async (bot, message, args) => {
                 }
                 bot.historyD[0] = {
                     outcome: `${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}`,
-                    time : gameTime
+                    time : `${gameTime.getDay()} ${gameTime.getMonth()} ${gameTime.getDate()} ${gameTime.getYear()}
+                    ${gameTime.getHours()}:${gameTime.getMinutes()}:${gameTime.getSeconds()}`
                 }
                 fs.writeFile("./historyD.json", JSON.stringify(bot.historyD, null, 4), err => {
                     if(err) throw err; 
@@ -176,7 +180,7 @@ module.exports.run = async (bot, message, args) => {
                 }
                 bot.historyD[0] = {
                     outcome: `${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}`,
-                    time : gameTime
+                    time : gameTime.toLocaleDateString('en-US', options)
                 }
                 if(bot.historyD[10]){
                     delete bot.historyD[10];
