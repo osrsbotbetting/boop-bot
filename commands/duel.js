@@ -165,7 +165,7 @@ module.exports.run = async (bot, message, args) => {
                 });
             }
             else{
-                message.channel.send("```md\n" + "# Duel Complete #\n" + `${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}` + "\n```");
+                message.channel.send("```md\n" + "# Test Duel Complete (No Rewards) #\n" + `${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}` + "\n```");
                 for(i in bot.historyD){
                     historyDlength ++
                 }
@@ -179,7 +179,7 @@ module.exports.run = async (bot, message, args) => {
                     }
                 }
                 bot.historyD[0] = {
-                    outcome: `${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}`,
+                    outcome: `*Test Duel* ${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}`,
                     time : gameTime.toLocaleDateString('en-US', options)
                 }
                 if(bot.historyD[10]){
