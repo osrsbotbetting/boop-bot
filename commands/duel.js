@@ -32,7 +32,7 @@ module.exports.run = async (bot, message, args) => {
     var toDuel = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
     
     if( !toDuel && args[1] == undefined && args[0] != "profile" && args[0] != "history"){
-        return message.channel.send("Specify a user mention or ID.");
+        return message.channel.send("Invalid inputs.");
     }
     else if(!toDuel && args[0] == "history"){
         var embed = new Discord.RichEmbed();
