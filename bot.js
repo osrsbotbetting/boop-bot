@@ -1,4 +1,5 @@
-const prefix = "!";
+const settings = require("./settings.json");
+const prefix = settings.prefix;
 const Discord = require('discord.js');
 const fs = require("fs");
 
@@ -7,7 +8,8 @@ bot.commands = new Discord.Collection();
 bot.mutes = require("./mutes.json");
 bot.levelD = require("./levelD.json");
 bot.historyD = require("./historyD.json");
-
+bot.inventory = require("./inventory.json");
+onlineTimer = 0;
 
 fs.readdir("./commands/", (err, files) => {
     if(err) console.error(err);
@@ -49,6 +51,25 @@ bot.on("ready", () => {
             }
         }
 
+        onlineTimer++;
+        for(let i in bot.inventory) {
+            let guildId = bot.inventory[i].guild;
+            let guild = bot.guilds.get(guildId);
+            let member = guild.members.get(i);
+
+            let currency = bot.inventory[i].currency;
+
+            if(onlineTimer == 60){
+                onlineTimer = 0;
+                if(member.presence.status == "online"){
+                    bot.inventory[i].Browncoins++;
+                    fs.writeFile("./inventory.json", JSON.stringify(bot.inventory), err => {
+                        if(err) throw err;
+                        console.log(`${i} has gained 1 currency.`);
+                    });
+                }
+            }
+        }
     }, 1000);
 });
 
@@ -67,4 +88,4 @@ bot.on("message", async message => {
     
 });
 
-bot.login(process.env.BOT_TOKEN);
+bot.login(settings.token);
