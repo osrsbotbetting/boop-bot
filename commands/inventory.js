@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args) => {
         }
         fs.writeFile("./inventory.json", JSON.stringify(bot.inventory), err => {
             if(err) throw err;
-            channel.message.send("An inventory has been created for you.);
+            channel.message.send("An inventory has been created for you.");
             console.log(`${inventoryOwner.tag}'s inventory has been created.`);
         });
     }
