@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
         });
     }
     let embed = new Discord.RichEmbed()
-        .setAuthor(inventoryOwner.username)
+        .setAuthor(`${inventoryOwner.tag}'s Inventory`)
         .setColor("#005EFF")
         console.log(bot.inventory[inventoryOwner.id]);
         for(i in bot.inventory[inventoryOwner.id]){
