@@ -59,6 +59,7 @@ bot.on("ready", () => {
             let currency = bot.inventory[i].currency;
 
             if(onlineTimer == 60){
+                console.log("A minute has passed");
                 onlineTimer = 0;
                 if(member.presence.status == "online"){
                     bot.inventory[i].Browncoins++;
