@@ -6,6 +6,9 @@
     "author": "JVC",
     "dependencies": {
         "discord.js": "^11.2.1",
+        "mongodb": "^3.0.2",
+        "save": "^2.3.2",
+        "snekfetch": "^3.6.4",
         "winston": "^2.4.0"
     }
 }
