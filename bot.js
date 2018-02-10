@@ -1,5 +1,4 @@
-const settings = require("./settings.json");
-const prefix = settings.prefix;
+const prefix = "!";
 const Discord = require('discord.js');
 const fs = require("fs");
 
@@ -88,4 +87,4 @@ bot.on("message", async message => {
     
 });
 
-bot.login(settings.token);
+bot.login(process.env.BOT_TOKEN);
