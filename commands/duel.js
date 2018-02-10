@@ -32,7 +32,7 @@ module.exports.run = async (bot, message, args) => {
     var toDuel = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
     
     if( !toDuel && args[1] == undefined && args[0] != "profile" && args[0] != "history"){
-        return message.channel.send("Invalid inputs.");
+        return message.channel.send("Specify a user mention or ID.");
     }
     else if(!toDuel && args[0] == "history"){
         var embed = new Discord.RichEmbed();
@@ -128,6 +128,27 @@ module.exports.run = async (bot, message, args) => {
         if(defenderHP < 1 ){
             done = true;
             if(toDuel2 != duelEE2){
+                message.channel.send("```md\n" + "# Duel Complete #\n" + `${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}` + "\n```");
+                bot.levelD[toDuel1].exp += 10;
+                bot.levelD[toDuel1].level = Math.floor(0.2 * Math.sqrt(bot.levelD[toDuel1].exp)) + 1;
+                bot.levelD[toDuel1].wins += 1;
+                bot.levelD[toDuel1].losses += 0;
+
+                bot.levelD[duelEE1].exp += 5;
+                bot.levelD[duelEE1].level = Math.floor(0.2 * Math.sqrt(bot.levelD[duelEE1].exp)) + 1;
+                bot.levelD[duelEE1].wins += 0;
+                bot.levelD[duelEE1].losses += 1;
+                fs.writeFile("./levelD.json", JSON.stringify(bot.levelD, null, 4), err => {
+                    if(err) throw err; 
+                    console.log(`Data saved.`);
+                });
+
+                bot.inventory[toDuel1].currency += 20; console.log(`${toDuel1} has won 20 currency`);
+                bot.inventory[duelEE1].currency += 10; console.log(`${duelEE1} has won 10 currency`);
+                fs.writeFile("./inventory.json", JSON.stringify(bot.inventory, null, 4), err => {
+                    if(err) throw err; 
+                    console.log(`Currency saved.`);
+                });
                 for(i in bot.historyD){
                     historyDlength ++
                 }
@@ -147,48 +168,35 @@ module.exports.run = async (bot, message, args) => {
                 }
                 fs.writeFile("./historyD.json", JSON.stringify(bot.historyD, null, 4), err => {
                     if(err) throw err; 
-                    console.log(`Data saved.`);
+                    console.log(`HistoryD saved.`);
                 });
-                message.channel.send("```md\n" + "# Duel Complete #\n" + `${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}` + "\n```");
-                bot.levelD[toDuel1].exp += 10;
-                bot.levelD[toDuel1].level = Math.floor(0.2 * Math.sqrt(bot.levelD[toDuel1].exp)) + 1;
-                bot.levelD[toDuel1].wins += 1;
-                bot.levelD[toDuel1].losses += 0;
 
-                bot.levelD[duelEE1].exp += 5;
-                bot.levelD[duelEE1].level = Math.floor(0.2 * Math.sqrt(bot.levelD[duelEE1].exp)) + 1;
-                bot.levelD[duelEE1].wins += 0;
-                bot.levelD[duelEE1].losses += 1;
-                fs.writeFile("./levelD.json", JSON.stringify(bot.levelD, null, 4), err => {
-                    if(err) throw err; 
-                    console.log(`Data saved.`);
-                });
             }
             else{
                 message.channel.send("```md\n" + "# Test Duel Complete (No Rewards) #\n" + `${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}` + "\n```");
-                for(i in bot.historyD){
-                    historyDlength ++
-                }
-                console.log(historyDlength);
-                if(bot.historyD[0]){
-                    for(let x=historyDlength-1; x >= 0; x--){
-                        bot.historyD[x+1] = {
-                            outcome : bot.historyD[x].outcome,
-                            time : bot.historyD[x].time
-                        }
-                    }
-                }
-                bot.historyD[0] = {
-                    outcome: `*Test Duel* ${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}`,
-                    time : gameTime.toLocaleDateString('en-US', options)
-                }
-                if(bot.historyD[10]){
-                    delete bot.historyD[10];
-                }
-                fs.writeFile("./historyD.json", JSON.stringify(bot.historyD, null, 4), err => {
-                    if(err) throw err; 
-                    console.log(`Data saved.`);
-                });
+                // for(i in bot.historyD){
+                //     historyDlength ++
+                // }
+                // console.log(historyDlength);
+                // if(bot.historyD[0]){
+                //     for(let x=historyDlength-1; x >= 0; x--){
+                //         bot.historyD[x+1] = {
+                //             outcome : bot.historyD[x].outcome,
+                //             time : bot.historyD[x].time
+                //         }
+                //     }
+                // }
+                // bot.historyD[0] = {
+                //     outcome: `*Test Duel* ${toDuel2}(${attackerHP}hp) has won the duel against ${duelEE2}`,
+                //     time : gameTime.toLocaleDateString('en-US', options)
+                // }
+                // if(bot.historyD[10]){
+                //     delete bot.historyD[10];
+                // }
+                // fs.writeFile("./historyD.json", JSON.stringify(bot.historyD, null, 4), err => {
+                //     if(err) throw err; 
+                //     console.log(`Data saved.`);
+                // });
             }
         }
     }
