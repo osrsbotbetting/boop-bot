@@ -2,14 +2,14 @@ const Discord = require('discord.js');
 const fs = require("fs");
 module.exports.run = async (bot, message, args) => {
     let inventoryOwner = message.author;
-    console.log("here);
+    console.log("here");
     if(!bot.inventory[inventoryOwner.id]){
-        console.log("here);
+        console.log("here");
         bot.inventory[inventoryOwner.id] = {
             guild : message.guild.id,
             Browncoins : 0
         }
-        console.log("here);
+        console.log("here");
         fs.writeFile("./inventory.json", JSON.stringify(bot.inventory), err => {
             if(err) throw err;
             message.channel.send("An inventory has been created for you.");
