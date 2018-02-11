@@ -56,7 +56,7 @@ bot.on("ready", () => {
             let guild = bot.guilds.get(guildId);
             let member = guild.members.get(i);
 
-            let currency = bot.inventory[i].currency;
+            //let currency = bot.inventory[i].currency;
 
             if(onlineTimer >= 60){
                 console.log("A minute has passed");
