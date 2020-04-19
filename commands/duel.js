@@ -357,7 +357,7 @@ module.exports.run = async (bot, message, args) => {
         msg.edit(`${toDuel.user.tag} has accepted the duel from ${message.author.tag}`);
         var turn = randomInt(0,1);
 
-        var color0 = "#e10606";
+        var color0 = "#0099e1";
         var color1 = "#e74600";
         console.log(`turn = ${turn} healthZero = ${healthZero} healthOne = ${healthOne}`);
         var done = false;
