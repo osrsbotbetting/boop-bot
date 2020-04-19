@@ -17,15 +17,15 @@ decline = "❎";
 module.exports.run = async (bot, message, args) => {
     healthZero = 20;
     healthOne = 20;
-    var bodyActions = ["blows on", "tickles", "licks", "farted on", "puked on", "pissed on", "shat on", "kisses", "rubs", "sucks on", "wetts"];
+    var bodyActions = ["slices", "stabs", "jousts", "crushes", "used magic on", "used prayer on", "claws", "attacks", "smacked", "rushed", "froze"];
     var bodyParts = ["foot", "head", "elbow", "thigh", "toes", "thumb", "fingers", "finger", "palm",
         "ear", "nose", "knee", "ankle", "shoulder", "face", "hand", "butt", "belly button", "stolen car"];
 
-    var withActions = ["stabs", "slaps", "pokes", "rubs"];
-    var projectileActions = ["throws a", "drop kicks a", "catapults a", "fires a"];
-    var firesALaunchers = ["rifle", "pistol", "crossbow", "cannon", "mortar", "BB gun", "slingshot", "long bow"];
-    var items = ["rock","spear", "baseball", "hay bale", "book", "wooden crate", "metal box", "pot", "stick", "keyboard",
-        "monitor", "spanish dildo", "volleyball", "KNOWLEDGE", "Coke", "Pepsi", "basketball",
+    var withActions = ["slices", "stabs", "jousts", "claws"];
+    var projectileActions = ["throws a", "yeets a", "catapults a", "fires a"];
+    var firesALaunchers = ["hand cannon", "twisted bow", "dragon crossbow", "longbow", "shortbow", "Compound now", "slingshot", "ballista"];
+    var items = ["rock","spear", "scimitar", "arrow", "bolt", "wooden crate", "metal box", "pot", "stick", "keyboard",
+        "monitor", "cannonball", "volleyball", "KNOWLEDGE", "Coke", "Pepsi", "basketball",
         "pencil", "pen", "staple", "ceramic pot", "paperclip", "iPhone 4S", "shuriken"];
 
     var duelEE = message.author;
