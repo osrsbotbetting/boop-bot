@@ -2,7 +2,8 @@ const prefix = "!!";
 const Discord = require('discord.js');
 const fs = require("fs");
 const http = require('http');
-
+const express = require('express');
+const app = express();
 
 const bot = new Discord.Client({disableEveryone: true});
 bot.commands = new Discord.Collection();
@@ -10,8 +11,16 @@ bot.mutes = require("./mutes.json");
 bot.levelD = require("./levelD.json");
 bot.historyD = require("./historyD.json");
 bot.inventory = require("./inventory.json");
-onlineTimer = 1;
+onlineTimer = 0;
 
+app.get("/", (request, response) => {
+  console.log(Date.now() + " Ping Received");
+  response.sendStatus(200);
+});
+app.listen(process.env.PORT);
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);
 
 fs.readdir("./commands/", (err, files) => {
     if(err) console.error(err);
