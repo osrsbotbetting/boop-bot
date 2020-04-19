@@ -1,4 +1,4 @@
-const prefix = "!";
+const prefix = "!!";
 const Discord = require('discord.js');
 const fs = require("fs");
 
@@ -28,7 +28,7 @@ fs.readdir("./commands/", (err, files) => {
 
 bot.on("ready", () => {
     console.log(`Bot is ready! ${bot.user.username}`);
-    bot.user.setGame("Beep Brown!")
+    bot.user.setGame("Rune zone duels!")
 
     bot.setInterval(() => {
         for(let i in bot.mutes) {
